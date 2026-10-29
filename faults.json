@@ -1,0 +1,433 @@
+{
+  "version": 2,
+  "faults": [
+    {
+      "id": "no_charging_01",
+      "titleAr": "مش بيشحن",
+      "deviceAr": "موبايل أندرويد",
+      "complaintAr": "حطيت الشاحن ومفيش أي رد فعل.. جربت أكتر من شاحن.",
+      "difficulty": 1,
+      "reward": 70,
+      "faultyPartId": "u2",
+      "hintAr": "تابع الجهد من المنفذ لحد ما يختفي. العطل بعد آخر نقطة فيها جهد.",
+      "explanationAr": "الجهد وصل لمدخل دائرة الشحن (5 فولت عند TP2) لكن مفيش خرج عند TP3. يبقى الفيوز سليم والعطل في U2 نفسها.",
+      "parts": [
+        {
+          "id": "usb",
+          "nameAr": "منفذ USB-C",
+          "type": "PORT",
+          "x": 0.1,
+          "y": 0.5,
+          "descriptionAr": "بيستقبل 5 فولت من الشاحن على خط VBUS.",
+          "price": 12
+        },
+        {
+          "id": "f1",
+          "nameAr": "فيوز F1",
+          "type": "FUSE",
+          "x": 0.32,
+          "y": 0.5,
+          "descriptionAr": "بيحمي الدائرة. لو اتحرق هتلاقي 5 فولت قبله ومفيش بعده.",
+          "price": 2
+        },
+        {
+          "id": "u2",
+          "nameAr": "دائرة الشحن U2",
+          "type": "CHARGER_IC",
+          "x": 0.58,
+          "y": 0.5,
+          "descriptionAr": "بتحوّل 5 فولت إلى جهد شحن البطارية (حوالي 4.2 فولت).",
+          "price": 25
+        },
+        {
+          "id": "bat",
+          "nameAr": "كونكتور البطارية",
+          "type": "BATTERY_CONNECTOR",
+          "x": 0.88,
+          "y": 0.5,
+          "descriptionAr": "بيوصّل خرج الشحن بالبطارية.",
+          "price": 6
+        }
+      ],
+      "testPoints": [
+        {
+          "id": "tp1",
+          "label": "TP1 · VBUS",
+          "x": 0.18,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "tp2",
+          "label": "TP2 · بعد الفيوز",
+          "x": 0.44,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "tp3",
+          "label": "TP3 · خرج الشحن",
+          "x": 0.76,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "gnd",
+          "label": "GND",
+          "x": 0.58,
+          "y": 0.85,
+          "isGround": true
+        }
+      ],
+      "brokenReadings": {
+        "tp1": {
+          "volts": 5.05,
+          "ohms": 480000
+        },
+        "tp2": {
+          "volts": 5.02,
+          "ohms": 470000
+        },
+        "tp3": {
+          "volts": 0.0,
+          "ohms": null
+        }
+      },
+      "healthyReadings": {
+        "tp1": {
+          "volts": 5.05,
+          "ohms": 480000
+        },
+        "tp2": {
+          "volts": 5.02,
+          "ohms": 470000
+        },
+        "tp3": {
+          "volts": 4.2,
+          "ohms": 95000
+        }
+      }
+    },
+    {
+      "id": "no_power_01",
+      "titleAr": "مش بيفتح",
+      "deviceAr": "موبايل أندرويد",
+      "complaintAr": "ضغطت على زرار التشغيل ومفيش أي حاجة.. والبطارية متشحنة.",
+      "difficulty": 2,
+      "reward": 80,
+      "faultyPartId": "l1",
+      "hintAr": "ابدأ من البطارية وتابع الجهد لحد ما يختفي.",
+      "explanationAr": "الجهد موجود عند TP1 (3.82 فولت) ومختفي بعد الملف L1. والمقاومة عند TP1 طلعت OL، يعني الملف مقطوع.",
+      "parts": [
+        {
+          "id": "bat",
+          "nameAr": "كونكتور البطارية",
+          "type": "BATTERY_CONNECTOR",
+          "x": 0.1,
+          "y": 0.5,
+          "descriptionAr": "بيوصّل البطارية بالبوردة وبيدّي حوالي 3.8 فولت.",
+          "price": 6
+        },
+        {
+          "id": "l1",
+          "nameAr": "ملف الطاقة L1",
+          "type": "INDUCTOR",
+          "x": 0.32,
+          "y": 0.5,
+          "descriptionAr": "بيمرّر جهد البطارية لدائرة الطاقة. لو اتقطع الجهد مبيكملش.",
+          "price": 4
+        },
+        {
+          "id": "pmic",
+          "nameAr": "دائرة الطاقة PMIC",
+          "type": "POWER_IC",
+          "x": 0.58,
+          "y": 0.5,
+          "descriptionAr": "بتوزّع الجهد على أجزاء الموبايل.",
+          "price": 30
+        },
+        {
+          "id": "c1",
+          "nameAr": "مكثف C1",
+          "type": "CAPACITOR",
+          "x": 0.88,
+          "y": 0.5,
+          "descriptionAr": "بيفلتر ويثبّت الجهد على خرج دائرة الطاقة.",
+          "price": 3
+        }
+      ],
+      "testPoints": [
+        {
+          "id": "tp1",
+          "label": "TP1 · خرج البطارية",
+          "x": 0.18,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "tp2",
+          "label": "TP2 · بعد الملف",
+          "x": 0.44,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "tp3",
+          "label": "TP3 · خرج PMIC",
+          "x": 0.76,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "gnd",
+          "label": "GND",
+          "x": 0.58,
+          "y": 0.85,
+          "isGround": true
+        }
+      ],
+      "brokenReadings": {
+        "tp1": {
+          "volts": 3.82,
+          "ohms": null
+        },
+        "tp2": {
+          "volts": 0.0,
+          "ohms": 18000
+        },
+        "tp3": {
+          "volts": 0.0,
+          "ohms": 22000
+        }
+      },
+      "healthyReadings": {
+        "tp1": {
+          "volts": 3.82,
+          "ohms": 18000
+        },
+        "tp2": {
+          "volts": 3.8,
+          "ohms": 18000
+        },
+        "tp3": {
+          "volts": 1.8,
+          "ohms": 22000
+        }
+      }
+    },
+    {
+      "id": "short_charging_01",
+      "titleAr": "بيسخن ومش بيشحن",
+      "deviceAr": "موبايل أندرويد",
+      "complaintAr": "أول ما أحط الشاحن الموبايل يسخن ومبيشحنش.",
+      "difficulty": 3,
+      "reward": 90,
+      "faultyPartId": "c3",
+      "hintAr": "الجهد وحده مش كفاية هنا. افصل الجهاز وقيس المقاومة لنقطة الأرضي عند كل نقطة.",
+      "explanationAr": "المقاومة عند TP3 قريبة من صفر، يعني قصر على خط الشحن. المكثف C3 هو السبب. تغيير دائرة الشحن كان هيبقى خسارة.",
+      "parts": [
+        {
+          "id": "usb",
+          "nameAr": "منفذ USB-C",
+          "type": "PORT",
+          "x": 0.1,
+          "y": 0.5,
+          "descriptionAr": "بيستقبل 5 فولت من الشاحن.",
+          "price": 12
+        },
+        {
+          "id": "f1",
+          "nameAr": "فيوز F1",
+          "type": "FUSE",
+          "x": 0.32,
+          "y": 0.5,
+          "descriptionAr": "بيحمي الدائرة من التيار الزائد.",
+          "price": 2
+        },
+        {
+          "id": "u2",
+          "nameAr": "دائرة الشحن U2",
+          "type": "CHARGER_IC",
+          "x": 0.58,
+          "y": 0.5,
+          "descriptionAr": "بتحوّل 5 فولت إلى جهد شحن البطارية.",
+          "price": 25
+        },
+        {
+          "id": "c3",
+          "nameAr": "مكثف C3",
+          "type": "CAPACITOR",
+          "x": 0.88,
+          "y": 0.5,
+          "descriptionAr": "مكثف على خرج الشحن. لو اتعمل فيه قصر بيسحب كل التيار.",
+          "price": 3
+        }
+      ],
+      "testPoints": [
+        {
+          "id": "tp1",
+          "label": "TP1 · VBUS",
+          "x": 0.18,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "tp2",
+          "label": "TP2 · بعد الفيوز",
+          "x": 0.44,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "tp3",
+          "label": "TP3 · خرج الشحن",
+          "x": 0.76,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "gnd",
+          "label": "GND",
+          "x": 0.58,
+          "y": 0.85,
+          "isGround": true
+        }
+      ],
+      "brokenReadings": {
+        "tp1": {
+          "volts": 4.1,
+          "ohms": 480000
+        },
+        "tp2": {
+          "volts": 3.95,
+          "ohms": 470000
+        },
+        "tp3": {
+          "volts": 0.15,
+          "ohms": 0.4
+        }
+      },
+      "healthyReadings": {
+        "tp1": {
+          "volts": 5.05,
+          "ohms": 480000
+        },
+        "tp2": {
+          "volts": 5.02,
+          "ohms": 470000
+        },
+        "tp3": {
+          "volts": 4.2,
+          "ohms": 95000
+        }
+      }
+    },
+    {
+      "id": "black_screen_01",
+      "titleAr": "شاشة سودا",
+      "deviceAr": "موبايل أندرويد",
+      "complaintAr": "الموبايل بيرن وبيهتز بس الشاشة سودا خالص.",
+      "difficulty": 2,
+      "reward": 85,
+      "faultyPartId": "d1",
+      "hintAr": "إضاءة الشاشة محتاجة جهد عالي. تابع الجهد بعد الملف.",
+      "explanationAr": "الجهد وصل لـ TP2 (3.78 فولت) لكن مفيش جهد عالي عند TP3. الدايود D1 مقطوع فمبيوصّلش جهد الإضاءة للشاشة.",
+      "parts": [
+        {
+          "id": "bat",
+          "nameAr": "كونكتور البطارية",
+          "type": "BATTERY_CONNECTOR",
+          "x": 0.1,
+          "y": 0.5,
+          "descriptionAr": "مصدر الجهد لدائرة الإضاءة.",
+          "price": 6
+        },
+        {
+          "id": "l2",
+          "nameAr": "ملف الإضاءة L2",
+          "type": "INDUCTOR",
+          "x": 0.32,
+          "y": 0.5,
+          "descriptionAr": "بيخزّن الطاقة ويرفع الجهد مع دائرة الإضاءة.",
+          "price": 4
+        },
+        {
+          "id": "d1",
+          "nameAr": "دايود D1",
+          "type": "DIODE",
+          "x": 0.58,
+          "y": 0.5,
+          "descriptionAr": "بيمرّر الجهد العالي في اتجاه واحد لخرج الإضاءة.",
+          "price": 3
+        },
+        {
+          "id": "scr",
+          "nameAr": "كونكتور الشاشة",
+          "type": "SCREEN_CONNECTOR",
+          "x": 0.88,
+          "y": 0.5,
+          "descriptionAr": "بيوصّل الشاشة بالبوردة.",
+          "price": 10
+        }
+      ],
+      "testPoints": [
+        {
+          "id": "tp1",
+          "label": "TP1 · البطارية",
+          "x": 0.21,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "tp2",
+          "label": "TP2 · بعد الملف",
+          "x": 0.45,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "tp3",
+          "label": "TP3 · خرج الإضاءة",
+          "x": 0.73,
+          "y": 0.5,
+          "isGround": false
+        },
+        {
+          "id": "gnd",
+          "label": "GND",
+          "x": 0.58,
+          "y": 0.85,
+          "isGround": true
+        }
+      ],
+      "brokenReadings": {
+        "tp1": {
+          "volts": 3.8,
+          "ohms": 25000
+        },
+        "tp2": {
+          "volts": 3.78,
+          "ohms": 24000
+        },
+        "tp3": {
+          "volts": 0.0,
+          "ohms": null
+        }
+      },
+      "healthyReadings": {
+        "tp1": {
+          "volts": 3.8,
+          "ohms": 25000
+        },
+        "tp2": {
+          "volts": 3.78,
+          "ohms": 24000
+        },
+        "tp3": {
+          "volts": 21.5,
+          "ohms": 850000
+        }
+      }
+    }
+  ]
+}
